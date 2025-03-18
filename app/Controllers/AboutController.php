@@ -1,23 +1,27 @@
 <?php
-// echo '
-// <ul>
-//   <li><a href="/">Home</a></li>
-//   <li><a href="/about">About</a></li>
-//   <li><a href="/contact">Contact</a></li>
-// </ul>
-// ';
 
-// echo "<h1>About page</h1>";
+require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
 
-// echo "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui laborum commodi eius ex delectus id accusantium at, veritatis, eligendi distinctio facilis doloribus voluptatibus dolor quo rerum ad quae, provident esse.";
+class AboutController
+{
+    public $title;
 
-// echo date("F j, Y");
-
-$title = "About page";
-
-$breadcrumbs =[
+    protected Response $response;
+    
+    public $breadcrumbs = [
     'title' => "About page",
     'link' => "/about",
-];
+    ];
 
-echo render('about/index', compact('title', 'breadcrumbs'));
+    public function __construct() {
+        // echo $this->title;
+    }
+
+    public function index() {
+        $this->title = "About page";
+        $body = render('about/index', ['title'=>$this->title]);
+        $this->response = new Response($body);
+        $this->response->send();
+    }
+    //echo render('home/index', compact('title', 'breadcrumbs'));
+}

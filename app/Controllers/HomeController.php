@@ -1,12 +1,25 @@
 <?php
 
-// echo "<h1>Home page</h1>";
+require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
+class HomeController
+{
+    // public $title = "Home page";
+    public $title;
 
-// echo "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui laborum commodi eius ex delectus id accusantium at, veritatis, eligendi distinctio facilis doloribus voluptatibus dolor quo rerum ad quae, provident esse.";
-$title = "Home page";
-$breadcrumbs =[
-    'title' => "Home page",
-    'link' => "/",
-];
-echo render('home/index', compact('title', 'breadcrumbs'));
-//render('home/index', ['title'=>$title]);
+    protected Response $response;
+    
+    public function __construct() {
+        // echo $this->title;
+    //     $this->title = "Home page";
+    //     render('home/index', ['title'=>$this->title]);
+     }
+
+    public function index() {
+        $this->title = "Home page";
+        $body = render('home/index', ['title'=>$this->title]);
+        $this->response = new Response($body);
+        $this->response->send();
+    }
+    //echo render('home/index', compact('title', 'breadcrumbs'));
+
+}
