@@ -1,25 +1,33 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
+declare(strict_types=1); 
+
+namespace App\Controllers;
+
+use App\Core\Http\Response;
+use App\Core\Render\View;
+
 class HomeController
 {
-    // public $title = "Home page";
     public $title;
 
     protected Response $response;
     
+    private View $view;
+    
     public function __construct() {
-        // echo $this->title;
-    //     $this->title = "Home page";
-    //     render('home/index', ['title'=>$this->title]);
-     }
+        $this->view = new View();
+    }
 
     public function index() {
         $this->title = "Home page";
-        $body = render('home/index', ['title'=>$this->title]);
+
+        // $body = render('home/index', ['title'=>$this->title]);
+        
+        $body = $this->view->render('home/index', ['title'=>$this->title]);
+        
         $this->response = new Response($body);
         $this->response->send();
     }
-    //echo render('home/index', compact('title', 'breadcrumbs'));
-
+    
 }

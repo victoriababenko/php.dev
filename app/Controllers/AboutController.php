@@ -1,6 +1,12 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
+declare(strict_types=1); 
+
+namespace App\Controllers;
+
+use App\Core\Http\Response;
+use App\Core\Render\View;
+
 
 class AboutController
 {
@@ -13,15 +19,18 @@ class AboutController
     'link' => "/about",
     ];
 
+    private View $view;
+    
     public function __construct() {
-        // echo $this->title;
+        $this->view = new View();
     }
 
     public function index() {
         $this->title = "About page";
-        $body = render('about/index', ['title'=>$this->title]);
+        // $body = render('about/index', ['title'=>$this->title]);
+        $body = $this->view->render('home/index', ['title'=>$this->title]);
+        
         $this->response = new Response($body);
         $this->response->send();
     }
-    //echo render('home/index', compact('title', 'breadcrumbs'));
-}
+    }

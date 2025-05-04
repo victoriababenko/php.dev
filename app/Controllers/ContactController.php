@@ -1,7 +1,10 @@
 <?php
 
-require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
-require_once dirname(__DIR__)."/Core/Database/Connection.php";
+namespace App\Controllers;
+
+use App\Core\Http\Response;
+// require_once dirname(__DIR__, 2)."/app/Core/http/Response.php";
+// require_once dirname(__DIR__)."/Core/Database/Connection.php";
 
 class ContactController
 {
@@ -22,8 +25,6 @@ class ContactController
     }
 
     public function index() {
-
-
         if ($_POST) {
             $first_name = htmlspecialchars($_POST['first_name']);
             $last_name = htmlspecialchars($_POST['last_name']);
